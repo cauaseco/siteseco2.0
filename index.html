@@ -1,1 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Visual de Redes para Automação</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --bg-color: #ecf0f1;
+            --card-bg: #ffffff;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Estilo das Abas */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            background-color: var(--secondary-color);
+        }
+
+        .tab-button {
+            background-color: inherit;
+            color: white;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 24px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .tab-button:hover {
+            background-color: #465c71;
+        }
+
+        .tab-button.active {
+            background-color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Conteúdo das Abas */
+        .tab-content {
+            display: none;
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Aba 1: Cards */
+        .cards-container {
+            display: flex;
+            gap: 20px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, border 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #555;
+            text-align: left;
+        }
+
+        /* Aba 2: Botões de Topologia */
+        .topology-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn-topology {
+            background-color: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            color: var(--primary-color);
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-topology:hover, .btn-topology.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .topology-info {
+            display: none;
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .topology-info h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+
+        ul {
+            line-height: 1.6;
+        }
+
+        .vantagem { color: #27ae60; font-weight: bold; }
+        .desvantagem { color: #c0392b; font-weight: bold; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia Visual de Redes para Automação</h1>
+        <p>Entenda a infraestrutura do chão de fábrica de forma simples</p>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab(event, 'cabos')">Cabos Industriais</button>
+        <button class="tab-button" onclick="openTab(event, 'topologias')">Topologias</button>
+    </div>
+
+    <div id="cabos" class="tab-content active">
+        <h2 style="text-align: center; color: var(--primary-color);">Meios de Comunicação</h2>
+        <div class="cards-container">
+            
+            <div class="card" onclick="toggleExplanation('exp-trancado')">
+                <h3>Par Trançado</h3>
+                <p>O cabo mais comum na indústria (ex: Ethernet industrial, Profinet).</p>
+                <div id="exp-trancado" class="explanation">
+                    <strong>Onde é usado:</strong> Perfeito para interligar CLPs (Controladores Lógicos Programáveis), IHMs (telas) e sensores dentro do mesmo painel elétrico ou em máquinas que estão fisicamente próximas umas das outras na fábrica.
+                </div>
+            </div>
+
+            <div class="card" onclick="toggleExplanation('exp-fibra')">
+                <h3>Fibra Óptica</h3>
+                <p>Comunicação através de feixes de luz.</p>
+                <div id="exp-fibra" class="explanation">
+                    <strong>Onde é usado:</strong> Utilizado quando o chão de fábrica tem muitos inversores e motores pesados que causam "ruído" (interferência eletromagnética). Também é ideal para conectar galpões distantes dentro do mesmo complexo industrial.
+                </div>
+            </div>
+
+            <div class="card" onclick="toggleExplanation('exp-wireless')">
+                <h3>Wireless (Sem fio)</h3>
+                <p>Comunicação via rádio/Wi-Fi industrial.</p>
+                <div id="exp-wireless" class="explanation">
+                    <strong>Onde é usado:</strong> Usado em equipamentos móveis (como robôs AGVs e empilhadeiras autônomas) ou para monitorar máquinas antigas e locais de difícil acesso, onde passar um cabo físico seria muito caro ou perigoso.
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="topologias" class="tab-content">
+        <h2 style="text-align: center; color: var(--primary-color);">Layouts de Rede</h2>
+        
+        <div class="topology-buttons">
+            <button class="btn-topology" id="btn-estrela" onclick="showTopology('estrela')">Layout em Estrela</button>
+            <button class="btn-topology" id="btn-barramento" onclick="showTopology('barramento')">Layout em Barramento</button>
+        </div>
+
+        <div id="info-estrela" class="topology-info">
+            <h3>Layout em Estrela</h3>
+            <p><strong>Como funciona:</strong> Todos os equipamentos da máquina (sensores, atuadores, CLPs) são conectados individualmente a um equipamento centralizador, geralmente um <em>Switch</em> industrial.</p>
+            
+            <p><span class="vantagem">Vantagens:</span></p>
+            <ul>
+                <li>Se um cabo quebrar, apenas aquela máquina ou sensor para de funcionar. O resto da fábrica continua operando.</li>
+                <li>É muito mais fácil identificar onde está o defeito, pois a falha é isolada.</li>
+            </ul>
+            
+            <p><span class="desvantagem">Desvantagens:</span></p>
+            <ul>
+                <li>Gasta-se muito mais com cabos, já que cada equipamento precisa de uma linha própria até o switch.</li>
+                <li>Se o Switch central queimar, toda a rede conectada a ele cai simultaneamente.</li>
+            </ul>
+        </div>
+
+        <div id="info-barramento" class="topology-info">
+            <h3>Layout em Barramento (Linha)</h3>
+            <p><strong>Como funciona:</strong> Um único cabo principal ("espinha dorsal") percorre o chão de fábrica, e todos os equipamentos se conectam a esse mesmo cabo (ou o cabo entra e sai de cada equipamento sequencialmente, formato "daisy chain").</p>
+            
+            <p><span class="vantagem">Vantagens:</span></p>
+            <ul>
+                <li>Usa bem menos cabo que o layout em estrela, o que barateia a infraestrutura física.</li>
+                <li>É muito fácil e rápido puxar uma extensão e adicionar um equipamento novo na mesma esteira.</li>
+            </ul>
+            
+            <p><span class="desvantagem">Desvantagens:</span></p>
+            <ul>
+                <li>Se houver um rompimento do cabo no meio da linha, todos os equipamentos que estão dali para frente perdem a comunicação
