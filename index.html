@@ -1,272 +1,241 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Guia Visual de Redes para Automação</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Visual de Redes para Automação</title>
+    <style>
+        /* Variáveis de Tema */
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #333333;
+            --header-bg: #1e3a8a;
+            --header-text: #ffffff;
+            --card-bg: #ffffff;
+            --card-hover: #e0e7ff;
+            --primary: #2563eb;
+            --secondary: #475569;
+            --border: #cbd5e1;
+            --success: #16a34a;
+            --danger: #dc2626;
+        }
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Arial, Helvetica, sans-serif;
-    }
+        .dark-theme {
+            --bg-color: #0f172a;
+            --text-color: #f1f5f9;
+            --header-bg: #1e293b;
+            --header-text: #38bdf8;
+            --card-bg: #1e293b;
+            --card-hover: #334155;
+            --primary: #38bdf8;
+            --secondary: #94a3b8;
+            --border: #475569;
+            --success: #4ade80;
+            --danger: #f87171;
+        }
 
-    body{
-      background:#f4f6f9;
-      color:#333;
-    }
+        /* Reset e Estilos Globais */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-    header{
-      background:#0d6efd;
-      color:white;
-      padding:20px;
-      text-align:center;
-    }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
 
-    .tabs{
-      display:flex;
-      justify-content:center;
-      background:#fff;
-      box-shadow:0 2px 5px rgba(0,0,0,.15);
-    }
+        /* Cabeçalho */
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
 
-    .tab{
-      padding:15px 25px;
-      cursor:pointer;
-      border:none;
-      background:none;
-      font-size:16px;
-      transition:.3s;
-    }
+        header h1 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .tab:hover,
-    .tab.active{
-      background:#0d6efd;
-      color:white;
-    }
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--header-text);
+            color: var(--header-text);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-    .content{
-      display:none;
-      padding:30px;
-    }
+        .theme-toggle:hover {
+            background-color: var(--header-text);
+            color: var(--header-bg);
+        }
 
-    .content.active{
-      display:block;
-    }
+        /* Navegação (Abas) */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
 
-    .cards{
-      display:flex;
-      gap:20px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
+        .tab-btn {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 2px solid var(--primary);
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
 
-    .card{
-      background:white;
-      width:220px;
-      padding:20px;
-      border-radius:10px;
-      box-shadow:0 3px 8px rgba(0,0,0,.15);
-      text-align:center;
-      cursor:pointer;
-      transition:.3s;
-    }
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: #fff;
+        }
 
-    .card:hover{
-      transform:translateY(-5px);
-      background:#e9f2ff;
-    }
+        /* Conteúdo das Abas */
+        .tab-content {
+            display: none;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem 2rem 1rem;
+            animation: fadeIn 0.4s ease-in-out;
+        }
 
-    .info{
-      margin-top:25px;
-      background:white;
-      padding:20px;
-      border-radius:10px;
-      box-shadow:0 3px 8px rgba(0,0,0,.15);
-    }
+        .tab-content.active {
+            display: block;
+        }
 
-    .buttons{
-      display:flex;
-      gap:15px;
-      justify-content:center;
-      margin-bottom:20px;
-      flex-wrap:wrap;
-    }
+        /* Cards - Cabos Industriais */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
 
-    .buttons button{
-      padding:12px 20px;
-      border:none;
-      border-radius:8px;
-      background:#0d6efd;
-      color:white;
-      cursor:pointer;
-      font-size:15px;
-    }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
 
-    .buttons button:hover{
-      background:#084298;
-    }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
 
-    ul{
-      margin-left:20px;
-      margin-top:8px;
-      margin-bottom:10px;
-    }
-  </style>
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
 
-</head>
+        .card-title {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
 
-<body>
+        .card-info {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
+        }
 
-<header>
-  <h1>Guia Visual de Redes para Automação</h1>
-  <p>Tipos de cabos e topologias usados em ambientes industriais</p>
-</header>
+        .card.active .card-info {
+            max-height: 200px; /* Ajuste se o texto for muito grande */
+            opacity: 1;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
 
-<div class="tabs">
-  <button class="tab active" onclick="abrirAba('cabos', this)">Cabos Industriais</button>
-  <button class="tab" onclick="abrirAba('topologias', this)">Topologias</button>
-</div>
+        /* Botões e Seção - Topologias */
+        .topology-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
 
-<!-- ABA 1 -->
+        .topo-btn {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
 
-<section id="cabos" class="content active">
+        .topo-btn:hover, .topo-btn.active {
+            background-color: var(--card-hover);
+            border-color: var(--primary);
+        }
 
-  <div class="cards">
+        .topology-details {
+            display: none;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            animation: fadeIn 0.3s ease-in-out;
+        }
 
-```
-<div class="card" onclick="mostrarCabo('par')">
-  <h2>Par Trançado</h2>
-</div>
+        .topology-details.active {
+            display: block;
+        }
 
-<div class="card" onclick="mostrarCabo('fibra')">
-  <h2>Fibra Óptica</h2>
-</div>
+        .topology-details h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
 
-<div class="card" onclick="mostrarCabo('wireless')">
-  <h2>Wireless</h2>
-</div>
-```
+        .lists-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
 
-  </div>
+        .list-box {
+            flex: 1;
+            min-width: 250px;
+        }
 
-  <div class="info" id="infoCabos">
-    <h2>Selecione um cabo</h2>
-    <p>Clique em um dos cards para visualizar a explicação.</p>
-  </div>
+        .list-box h4 {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-</section>
+        .pro-title { color: var(--success); }
+        .con-title { color: var(--danger); }
 
-<!-- ABA 2 -->
-
-<section id="topologias" class="content">
-
-  <div class="buttons">
-    <button onclick="mostrarTopo('estrela')">Layout em Estrela</button>
-    <button onclick="mostrarTopo('barramento')">Layout em Barramento</button>
-  </div>
-
-  <div class="info" id="infoTopo">
-    <h2>Escolha uma topologia</h2>
-    <p>Clique em um dos botões acima.</p>
-  </div>
-
-</section>
-
-<script>
-
-function abrirAba(id, elemento){
-
-    document.querySelectorAll(".content").forEach(sec=>{
-        sec.classList.remove("active");
-    });
-
-    document.querySelectorAll(".tab").forEach(tab=>{
-        tab.classList.remove("active");
-    });
-
-    document.getElementById(id).classList.add("active");
-    elemento.classList.add("active");
-}
-
-function mostrarCabo(tipo){
-
-    const info=document.getElementById("infoCabos");
-
-    if(tipo==="par"){
-        info.innerHTML=`
-        <h2>Par Trançado</h2>
-        <p>É usado para conectar CLPs, computadores, IHMs e switches dentro da fábrica. É uma solução econômica para distâncias menores.</p>`;
-    }
-
-    if(tipo==="fibra"){
-        info.innerHTML=`
-        <h2>Fibra Óptica</h2>
-        <p>É usada para ligar setores distantes da fábrica. Possui alta velocidade e não sofre interferência elétrica.</p>`;
-    }
-
-    if(tipo==="wireless"){
-        info.innerHTML=`
-        <h2>Wireless</h2>
-        <p>É utilizado para comunicação sem fios entre equipamentos móveis, tablets industriais, sensores e coletores de dados.</p>`;
-    }
-
-}
-
-function mostrarTopo(tipo){
-
-    const info=document.getElementById("infoTopo");
-
-    if(tipo==="estrela"){
-
-        info.innerHTML=`
-        <h2>Layout em Estrela</h2>
-
-        <p>Todos os equipamentos são ligados a um equipamento central (switch).</p>
-
-        <h3>Vantagens</h3>
-        <ul>
-            <li>Fácil manutenção.</li>
-            <li>Falha em um cabo não afeta os demais.</li>
-            <li>Boa organização da rede.</li>
-        </ul>
-
-        <h3>Desvantagens</h3>
-        <ul>
-            <li>Usa mais cabos.</li>
-            <li>Depende do switch central.</li>
-        </ul>
-        `;
-    }
-
-    if(tipo==="barramento"){
-
-        info.innerHTML=`
-        <h2>Layout em Barramento</h2>
-
-        <p>Todos os equipamentos compartilham o mesmo cabo principal.</p>
-
-        <h3>Vantagens</h3>
-        <ul>
-            <li>Instalação simples.</li>
-            <li>Menor quantidade de cabos.</li>
-            <li>Custo reduzido.</li>
-        </ul>
-
-        <h3>Desvantagens</h3>
-        <ul>
-            <li>Falhas podem interromper toda a comunicação.</li>
-            <li>Mais difícil localizar problemas.</li>
-        </ul>
-        `;
-    }
-
-}
-
-</script>
-
-</body>
-</html>
+        .list-box ul {
+            list-style-position: inside;
+            padding-left: 0;
