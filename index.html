@@ -5,524 +5,966 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guia Visual de Redes para Automação</title>
   <style>
+    /* ===== RESET & BASE ===== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    :root {
+      --primary: #0a2e3f;
+      --secondary: #1a5a6e;
+      --accent: #2b9bb0;
+      --light-bg: #f0f7fa;
+      --card-shadow: 0 8px 24px rgba(10, 46, 63, 0.10);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
     body {
-      background: #f0f4f8;
-      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      background: linear-gradient(135deg, #e8f0f5 0%, #d5e3ec 100%);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 2rem 1rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      padding: 2rem 1rem;
     }
 
+    /* ===== CONTAINER PRINCIPAL ===== */
     .container {
-      max-width: 1200px;
+      max-width: 1300px;
       width: 100%;
-      background: #ffffff;
-      border-radius: 2rem;
-      box-shadow: 0 20px 40px rgba(0, 20, 30, 0.15);
-      padding: 2rem 2rem 2.5rem;
-      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 2.5rem;
+      box-shadow: 0 25px 50px -8px rgba(0, 20, 30, 0.25);
+      padding: 2.5rem 2.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      transition: var(--transition);
     }
 
-    h1 {
-      font-size: 2.4rem;
-      font-weight: 600;
-      color: #0b2a3b;
+    /* ===== HEADER ===== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 2px solid rgba(26, 90, 110, 0.15);
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .header-left h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--primary);
       letter-spacing: -0.5px;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.25rem;
+      gap: 0.6rem;
     }
 
-    .subhead {
-      color: #3a5e6e;
-      font-weight: 400;
+    .header-left h1 span {
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: #3a6a7a;
       font-size: 1rem;
-      border-left: 3px solid #2b7a8a;
-      padding-left: 0.75rem;
-      margin-bottom: 1.8rem;
-      opacity: 0.8;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    /* Abas (tabs) */
+    .subtitle .badge {
+      background: var(--accent);
+      color: white;
+      padding: 0.15rem 0.9rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      -webkit-text-fill-color: white;
+    }
+
+    .stats {
+      display: flex;
+      gap: 2rem;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 0.5rem 1.8rem;
+      border-radius: 3rem;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-item .number {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: block;
+    }
+
+    .stat-item .label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: #4a7a8a;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    /* ===== TABS ===== */
     .tabs {
       display: flex;
-      gap: 0.25rem;
-      border-bottom: 2px solid #dde7ed;
-      margin-bottom: 2rem;
+      gap: 0.5rem;
+      margin-bottom: 2.2rem;
+      background: rgba(240, 247, 250, 0.6);
+      padding: 0.4rem;
+      border-radius: 4rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     .tab-btn {
-      background: transparent;
+      flex: 1;
+      padding: 0.8rem 1.8rem;
       border: none;
-      padding: 0.9rem 2rem;
-      font-size: 1.1rem;
+      background: transparent;
+      border-radius: 3rem;
+      font-size: 1.05rem;
       font-weight: 600;
-      color: #3a5e6e;
+      color: #3a6a7a;
       cursor: pointer;
-      border-radius: 2rem 2rem 0 0;
-      transition: all 0.2s;
-      letter-spacing: 0.3px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
       position: relative;
     }
 
     .tab-btn:hover {
-      background: #e6f0f5;
-      color: #0b2a3b;
+      background: rgba(255, 255, 255, 0.5);
+      color: var(--primary);
     }
 
     .tab-btn.active {
-      background: #e1eef5;
-      color: #074b5e;
-      box-shadow: inset 0 -3px 0 #2b7a8a;
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 4px 16px rgba(10, 46, 63, 0.10);
     }
 
+    .tab-btn .icon {
+      font-size: 1.3rem;
+    }
+
+    .tab-btn .count {
+      background: var(--accent);
+      color: white;
+      border-radius: 40px;
+      padding: 0.1rem 0.7rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      -webkit-text-fill-color: white;
+    }
+
+    /* ===== TAB CONTENT ===== */
     .tab-content {
       display: none;
-      animation: fade 0.25s ease;
+      animation: slideFade 0.4s ease;
     }
 
     .tab-content.active {
       display: block;
     }
 
-    @keyframes fade {
-      0% { opacity: 0.5; transform: translateY(4px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @keyframes slideFade {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    /* Cards - Cabos */
+    /* ===== CARDS - CABOS ===== */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.3rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .section-header .hint {
+      font-size: 0.85rem;
+      color: #5a8a9a;
+      background: rgba(43, 155, 176, 0.10);
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+    }
+
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.8rem;
-      margin: 1.2rem 0 0.8rem;
+      margin-bottom: 2rem;
     }
 
     .card {
-      background: #f9fcff;
-      border-radius: 1.4rem;
-      padding: 1.6rem 1.2rem 1.8rem;
-      box-shadow: 0 4px 12px rgba(0, 20, 30, 0.06);
-      border: 1px solid #e6edf3;
-      transition: all 0.2s;
+      background: white;
+      border-radius: 1.8rem;
+      padding: 2rem 1.5rem 1.8rem;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(255, 255, 255, 0.6);
       cursor: pointer;
-      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      opacity: 0;
+      transition: var(--transition);
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 24px rgba(23, 75, 90, 0.10);
-      border-color: #b6d4e0;
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(10, 46, 63, 0.12);
     }
 
-    .card h3 {
-      font-size: 1.6rem;
-      font-weight: 500;
-      color: #0b2a3b;
-      margin-bottom: 0.4rem;
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card.active {
+      border-color: var(--accent);
+      box-shadow: 0 8px 28px rgba(43, 155, 176, 0.20);
+    }
+
+    .card.active::before {
+      opacity: 1;
     }
 
     .card .emoji-big {
-      font-size: 2.6rem;
+      font-size: 3.2rem;
       display: block;
-      margin-bottom: 0.25rem;
-    }
-
-    .card .badge {
-      display: inline-block;
-      background: #d7e6ee;
-      padding: 0.2rem 1rem;
-      border-radius: 40px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: #13505e;
-      letter-spacing: 0.3px;
-      margin-top: 0.4rem;
-    }
-
-    .explicacao-box {
-      margin-top: 2rem;
-      background: #e9f2f8;
-      border-radius: 1.2rem;
-      padding: 1.5rem 2rem;
-      border-left: 6px solid #2b7a8a;
-      transition: 0.2s;
-    }
-
-    .explicacao-box p {
-      font-size: 1.1rem;
-      color: #103a47;
-      line-height: 1.5;
-    }
-
-    .explicacao-box .label {
-      font-weight: 600;
-      color: #074b5e;
-      margin-right: 0.5rem;
-    }
-
-    .explicacao-box .empty-state {
-      color: #3f6b7a;
-      font-style: italic;
-      opacity: 0.7;
-    }
-
-    /* Topologias */
-    .topo-botoes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      margin: 1.2rem 0 1.8rem;
-    }
-
-    .topo-btn {
-      background: #f2f8fc;
-      border: 2px solid #cddde7;
-      padding: 0.9rem 2.2rem;
-      border-radius: 60px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #0f3849;
-      cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-      letter-spacing: 0.3px;
-    }
-
-    .topo-btn:hover {
-      background: #ddecf5;
-      border-color: #7faec2;
-      transform: scale(1.01);
-    }
-
-    .topo-btn.active {
-      background: #1d657b;
-      border-color: #1d657b;
-      color: white;
-      box-shadow: 0 8px 14px rgba(23, 78, 95, 0.2);
-    }
-
-    .topo-detalhe {
-      background: #f5faff;
-      border-radius: 1.5rem;
-      padding: 1.8rem 2.2rem;
-      border: 1px solid #d6e5ef;
-      margin-top: 0.5rem;
-    }
-
-    .topo-detalhe h4 {
-      font-size: 1.6rem;
-      font-weight: 500;
-      color: #04323f;
       margin-bottom: 0.5rem;
     }
 
-    .topo-detalhe .desc {
-      font-size: 1.05rem;
-      color: #1b4a5a;
-      background: #e5f0f7;
-      padding: 0.8rem 1.2rem;
-      border-radius: 1rem;
-      margin: 0.6rem 0 1.2rem;
-      line-height: 1.5;
+    .card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
     }
 
-    .vantagens, .desvantagens {
-      margin: 0.8rem 0 0.3rem;
-      padding-left: 0.2rem;
-    }
-
-    .vantagens strong, .desvantagens strong {
+    .card .card-tag {
       display: inline-block;
-      width: 110px;
-      color: #04323f;
+      background: #e8f0f5;
+      padding: 0.15rem 1rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--secondary);
+      letter-spacing: 0.3px;
+      margin-top: 0.3rem;
     }
 
-    .vantagens ul, .desvantagens ul {
+    .card .card-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: white;
+      padding: 0.15rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      -webkit-text-fill-color: white;
+    }
+
+    /* ===== EXPLICAÇÃO CABO ===== */
+    .explicacao-box {
+      background: white;
+      border-radius: 1.8rem;
+      padding: 1.8rem 2.2rem;
+      box-shadow: var(--card-shadow);
+      border-left: 6px solid var(--accent);
+      transition: var(--transition);
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+    }
+
+    .explicacao-box .empty-state {
+      color: #7a9aaa;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      width: 100%;
+    }
+
+    .explicacao-box .empty-state .pulse {
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    .explicacao-box .cabo-detail {
+      width: 100%;
+    }
+
+    .explicacao-box .cabo-detail .cabo-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .explicacao-box .cabo-detail .cabo-title .tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: #e8f0f5;
+      padding: 0.1rem 1rem;
+      border-radius: 40px;
+      color: var(--secondary);
+    }
+
+    .explicacao-box .cabo-detail p {
+      color: #1a4a5a;
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    .explicacao-box .cabo-detail .use-cases {
+      margin-top: 0.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .explicacao-box .cabo-detail .use-cases .chip {
+      background: #e8f0f5;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--secondary);
+    }
+
+    /* ===== TOPOLOGIAS ===== */
+    .topo-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .topo-btn {
+      padding: 0.9rem 2.4rem;
+      border: 2px solid #d5e3ec;
+      background: white;
+      border-radius: 3rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      flex: 1;
+      justify-content: center;
+      min-width: 180px;
+    }
+
+    .topo-btn:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(43, 155, 176, 0.12);
+    }
+
+    .topo-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      box-shadow: 0 8px 24px rgba(10, 46, 63, 0.20);
+    }
+
+    .topo-btn .topo-icon {
+      font-size: 1.5rem;
+    }
+
+    /* ===== DETALHE TOPOLOGIA ===== */
+    .topo-detalhe {
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem 2.5rem;
+      box-shadow: var(--card-shadow);
+      min-height: 200px;
+      transition: var(--transition);
+    }
+
+    .topo-detalhe .empty-topo {
+      color: #7a9aaa;
+      text-align: center;
+      padding: 1.5rem 0;
+      font-size: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .topo-detalhe .empty-topo .big-icon {
+      font-size: 3rem;
+      opacity: 0.5;
+    }
+
+    .topo-detalhe .topo-content h4 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .topo-detalhe .topo-content .desc {
+      background: #f0f7fa;
+      padding: 1rem 1.5rem;
+      border-radius: 1.2rem;
+      font-size: 1.05rem;
+      color: #1a4a5a;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--accent);
+    }
+
+    .topo-detalhe .topo-content .lists {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .topo-detalhe .topo-content .lists {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .topo-detalhe .topo-content .list-block {
+      background: #f8fbfd;
+      padding: 1.2rem 1.5rem;
+      border-radius: 1.2rem;
+    }
+
+    .topo-detalhe .topo-content .list-block strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .topo-detalhe .topo-content .list-block ul {
       list-style: none;
-      padding-left: 1.5rem;
-      margin: 0.3rem 0 0.8rem;
+      padding: 0;
     }
 
-    .vantagens li, .desvantagens li {
+    .topo-detalhe .topo-content .list-block ul li {
+      padding: 0.3rem 0 0.3rem 1.8rem;
       position: relative;
-      padding-left: 1.8rem;
-      margin-bottom: 0.4rem;
-      line-height: 1.4;
-      color: #1f4454;
+      color: #1a4a5a;
+      line-height: 1.5;
+      font-size: 0.95rem;
     }
 
-    .vantagens li::before {
-      content: "✔️";
+    .topo-detalhe .topo-content .list-block.vantagens ul li::before {
+      content: "✅";
       position: absolute;
       left: -0.2rem;
-      color: #1d7a5e;
     }
 
-    .desvantagens li::before {
+    .topo-detalhe .topo-content .list-block.desvantagens ul li::before {
       content: "⚠️";
       position: absolute;
       left: -0.2rem;
-      color: #b1623a;
     }
 
-    .empty-topo {
-      color: #416f7e;
-      font-style: italic;
-      opacity: 0.7;
-      padding: 0.8rem 0;
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border-radius: 3rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      box-shadow: 0 8px 24px rgba(10, 46, 63, 0.25);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
     }
 
-    footer {
-      margin-top: 2.5rem;
-      text-align: right;
-      color: #7f9dad;
-      font-size: 0.8rem;
-      border-top: 1px solid #e2edf5;
-      padding-top: 1.2rem;
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
     }
 
-    /* Responsivo */
-    @media (max-width: 640px) {
-      .container { padding: 1.2rem; }
-      h1 { font-size: 1.8rem; }
-      .tab-btn { padding: 0.6rem 1.2rem; font-size: 1rem; }
-      .card-grid { grid-template-columns: 1fr; }
-      .topo-btn { flex: 1 1 100%; justify-content: center; }
-      .topo-detalhe { padding: 1.2rem; }
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+        border-radius: 1.8rem;
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+      }
+
+      .header-left h1 {
+        font-size: 2rem;
+      }
+
+      .stats {
+        padding: 0.5rem 1.2rem;
+        gap: 1.2rem;
+        justify-content: center;
+      }
+
+      .tabs {
+        flex-direction: column;
+        border-radius: 1.5rem;
+        background: transparent;
+        padding: 0;
+        gap: 0.3rem;
+      }
+
+      .tab-btn {
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 1.2rem;
+        padding: 0.7rem 1.2rem;
+        justify-content: center;
+      }
+
+      .tab-btn.active {
+        background: white;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topo-btn {
+        flex: 1 1 100%;
+      }
+
+      .explicacao-box {
+        padding: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 1rem;
+      }
+      .header-left h1 {
+        font-size: 1.6rem;
+        flex-wrap: wrap;
+      }
     }
   </style>
 </head>
 <body>
-<div class="container">
-  <h1>⚙️ Guia Visual de Redes <span style="font-weight:300;color:#2b7a8a;">para Automação</span></h1>
-  <div class="subhead">Chão de fábrica • Cabos & Topologias</div>
 
-  <!-- Abas -->
-  <div class="tabs">
-    <button class="tab-btn active" data-tab="cabos">🔌 Cabos Industriais</button>
-    <button class="tab-btn" data-tab="topologias">📶 Topologias</button>
+  <!-- ===== TOAST ===== -->
+  <div id="toast" class="toast">✅ Selecionado!</div>
+
+  <div class="container">
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+      <div class="header-left">
+        <h1>
+          ⚙️ Guia <span>Visual</span>
+          <span style="font-size:0.6em; -webkit-text-fill-color: var(--secondary); background: none;">para Automação</span>
+        </h1>
+        <div class="subtitle">
+          <span>🏭 Chão de fábrica inteligente</span>
+          <span class="badge">v2.0</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat-item">
+          <span class="number">3</span>
+          <span class="label">Cabos</span>
+        </div>
+        <div class="stat-item">
+          <span class="number">2</span>
+          <span class="label">Topologias</span>
+        </div>
+        <div class="stat-item">
+          <span class="number">12</span>
+          <span class="label">Aplicações</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TABS ===== -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="cabos">
+        <span class="icon">🔌</span> Cabos Industriais
+        <span class="count">3</span>
+      </button>
+      <button class="tab-btn" data-tab="topologias">
+        <span class="icon">📶</span> Topologias
+        <span class="count">2</span>
+      </button>
+    </div>
+
+    <!-- ===== ABA 1: CABOS ===== -->
+    <div id="cabos" class="tab-content active">
+      <div class="section-header">
+        <h2>📋 Selecione um tipo de cabo</h2>
+        <span class="hint">💡 Clique para ver detalhes</span>
+      </div>
+
+      <div class="card-grid">
+        <div class="card" data-cabo="trancado">
+          <span class="card-badge">Popular</span>
+          <span class="emoji-big">🔄</span>
+          <h3>Par Trançado</h3>
+          <span class="card-tag">Ethernet Industrial</span>
+        </div>
+        <div class="card" data-cabo="fibra">
+          <span class="card-badge">Alta Veloc.</span>
+          <span class="emoji-big">💡</span>
+          <h3>Fibra Óptica</h3>
+          <span class="card-tag">Backbone</span>
+        </div>
+        <div class="card" data-cabo="wireless">
+          <span class="card-badge">Mobilidade</span>
+          <span class="emoji-big">📡</span>
+          <h3>Wireless</h3>
+          <span class="card-tag">IoT / AGV</span>
+        </div>
+      </div>
+
+      <div id="explicacao-cabo" class="explicacao-box">
+        <div class="empty-state">
+          <span class="pulse">👆</span> Clique em um card para ver onde ele é usado na fábrica.
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ABA 2: TOPOLOGIAS ===== -->
+    <div id="topologias" class="tab-content">
+      <div class="section-header">
+        <h2>🔀 Escolha o layout da rede</h2>
+        <span class="hint">📊 Compare vantagens</span>
+      </div>
+
+      <div class="topo-controls">
+        <button class="topo-btn" data-topo="estrela">
+          <span class="topo-icon">⭐</span> Layout em Estrela
+        </button>
+        <button class="topo-btn" data-topo="barramento">
+          <span class="topo-icon">〰️</span> Layout em Barramento
+        </button>
+      </div>
+
+      <div id="detalhe-topo" class="topo-detalhe">
+        <div class="empty-topo">
+          <span class="big-icon">🔍</span>
+          Selecione um layout para ver explicação, vantagens e desvantagens.
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div style="margin-top: 2.5rem; padding-top: 1.2rem; border-top: 2px solid rgba(26, 90, 110, 0.10); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+      <span style="color: #5a8a9a; font-size: 0.8rem;">🏭 Automação Industrial • Rede & Comunicação</span>
+      <span style="color: #7a9aaa; font-size: 0.7rem;">Atualizado em 2026 • Guia Visual</span>
+    </div>
   </div>
 
-  <!-- CONTEÚDO ABA 1: CABOS -->
-  <div id="cabos" class="tab-content active">
-    <div class="card-grid">
-      <!-- Card 1: Par Trançado -->
-      <div class="card" data-cabo="trancado">
-        <span class="emoji-big">🔄</span>
-        <h3>Par Trançado</h3>
-        <span class="badge">Ethernet industrial</span>
-      </div>
-      <!-- Card 2: Fibra Óptica -->
-      <div class="card" data-cabo="fibra">
-        <span class="emoji-big">💡</span>
-        <h3>Fibra Óptica</h3>
-        <span class="badge">Alta velocidade</span>
-      </div>
-      <!-- Card 3: Wireless -->
-      <div class="card" data-cabo="wireless">
-        <span class="emoji-big">📡</span>
-        <h3>Wireless</h3>
-        <span class="badge">Mobilidade</span>
-      </div>
-    </div>
+  <script>
+    (function() {
+      'use strict';
 
-    <!-- Área de explicação (dinâmica) -->
-    <div id="explicacao-cabo" class="explicacao-box">
-      <p><span class="label">📌 Clique em um card</span> <span class="empty-state">para ver onde é usado na fábrica.</span></p>
-    </div>
-  </div>
-
-  <!-- CONTEÚDO ABA 2: TOPOLOGIAS -->
-  <div id="topologias" class="tab-content">
-    <div class="topo-botoes">
-      <button class="topo-btn" data-topo="estrela">⭐ Layout em Estrela</button>
-      <button class="topo-btn" data-topo="barramento">〰️ Layout em Barramento</button>
-    </div>
-
-    <!-- Área de detalhe da topologia -->
-    <div id="detalhe-topo" class="topo-detalhe">
-      <p class="empty-topo">🔍 Selecione um layout para ver explicação, vantagens e desvantagens.</p>
-    </div>
-  </div>
-
-  <footer>🏭 Automação Industrial • Rede & Comunicação</footer>
-</div>
-
-<script>
-  (function() {
-    // -------- DADOS DOS CABOS --------
-    const cabosInfo = {
-      trancado: {
-        titulo: "Par Trançado",
-        uso: "Usado em redes Ethernet industriais (PROFINET, EtherNet/IP). Conecta CLPs, I/O remoto, drives e HMIs em curtas/médias distâncias (até 100m). Ideal para ambientes com interferência moderada."
-      },
-      fibra: {
-        titulo: "Fibra Óptica",
-        uso: "Empregada em backbones de fábrica e conexões entre armários elétricos. Suporta longas distâncias (km) e é imune a interferências eletromagnéticas. Essencial para ambientes com alta tensão e ruído."
-      },
-      wireless: {
-        titulo: "Wireless",
-        uso: "Utilizado em AGVs (robôs móveis), empilhadeiras e dispositivos móveis. Também em locais de difícil cabeamento. Ideal para comunicação com equipamentos em movimento ou em áreas temporárias."
-      }
-    };
-
-    // -------- DADOS DAS TOPOLOGIAS --------
-    const topoInfo = {
-      estrela: {
-        titulo: "Layout em Estrela",
-        explicacao: "Todos os dispositivos (CLPs, HMIs, drives) conectam-se a um switch central. É a topologia mais comum em células de manufatura modernas.",
-        vantagens: [
-          "Falha em um dispositivo não afeta os demais (isolamento)",
-          "Facilidade para adicionar ou remover equipamentos",
-          "Diagnóstico rápido e manutenção simplificada",
-          "Desempenho consistente mesmo com tráfego intenso"
-        ],
-        desvantagens: [
-          "Dependência do switch central (ponto único de falha)",
-          "Maior custo com switches e cabeamento estruturado",
-          "Exige planejamento de rack e espaço físico"
-        ]
-      },
-      barramento: {
-        titulo: "Layout em Barramento",
-        explicacao: "Todos os nós compartilham um único cabo (barramento) com terminações. Usado em redes fieldbus (Profibus, RS-485) e em aplicações mais antigas ou de baixa velocidade.",
-        vantagens: [
-          "Menos cabos e menor custo de instalação",
-          "Simples de implementar em linhas longas",
-          "Ideal para redes com poucos dispositivos e distâncias médias"
-        ],
-        desvantagens: [
-          "Falha em um nó ou no cabo pode derrubar toda a rede",
-          "Dificuldade para diagnosticar problemas específicos",
-          "Degradação de desempenho com muitos dispositivos",
-          "Limitação no comprimento total e na taxa de transmissão"
-        ]
-      }
-    };
-
-    // -------- ELEMENTOS DOM --------
-    const cabosCards = document.querySelectorAll('.card');
-    const explicacaoDiv = document.getElementById('explicacao-cabo');
-
-    const topoBtns = document.querySelectorAll('.topo-btn');
-    const detalheTopo = document.getElementById('detalhe-topo');
-
-    // -------- FUNÇÃO PARA ATUALIZAR EXPLICAÇÃO DO CABO --------
-    function atualizarExplicacaoCabo(caboKey) {
-      const info = cabosInfo[caboKey];
-      if (!info) return;
-      explicacaoDiv.innerHTML = `
-        <p><span class="label">📍 ${info.titulo}</span> ${info.uso}</p>
-      `;
-    }
-
-    // -------- FUNÇÃO PARA RENDERIZAR TOPOLOGIA --------
-    function renderizarTopologia(topoKey) {
-      const info = topoInfo[topoKey];
-      if (!info) {
-        detalheTopo.innerHTML = `<p class="empty-topo">🔍 Selecione um layout para ver explicação, vantagens e desvantagens.</p>`;
-        return;
-      }
-
-      const vantagensHtml = info.vantagens.map(item => `<li>${item}</li>`).join('');
-      const desvantagensHtml = info.desvantagens.map(item => `<li>${item}</li>`).join('');
-
-      detalheTopo.innerHTML = `
-        <h4>${info.titulo}</h4>
-        <div class="desc">${info.explicacao}</div>
-        <div class="vantagens"><strong>✅ Vantagens</strong><ul>${vantagensHtml}</ul></div>
-        <div class="desvantagens"><strong>⚠️ Desvantagens</strong><ul>${desvantagensHtml}</ul></div>
-      `;
-    }
-
-    // -------- EVENTOS: CARDS DE CABO --------
-    cabosCards.forEach(card => {
-      card.addEventListener('click', function(e) {
-        const cabo = this.dataset.cabo; // 'trancado', 'fibra', 'wireless'
-        if (cabo && cabosInfo[cabo]) {
-          atualizarExplicacaoCabo(cabo);
+      // ============================================================
+      //  DADOS
+      // ============================================================
+      const cabosInfo = {
+        trancado: {
+          titulo: 'Par Trançado',
+          emoji: '🔄',
+          descricao: 'Usado em redes Ethernet industriais (PROFINET, EtherNet/IP) para conectar CLPs, I/O remoto, drives e HMIs em distâncias de até 100m.',
+          tags: ['CLPs', 'Drives', 'HMIs', 'I/O Remoto'],
+          aplicacoes: ['Células de manufatura', 'Linhas de montagem', 'Painéis de controle']
+        },
+        fibra: {
+          titulo: 'Fibra Óptica',
+          emoji: '💡',
+          descricao: 'Empregada em backbones de fábrica e conexões entre armários elétricos. Suporta longas distâncias (até 40km) e é imune a interferências eletromagnéticas.',
+          tags: ['Backbone', 'Alta Velocidade', 'Longa Distância'],
+          aplicacoes: ['Interligação de prédios', 'Ambientes com ruído', 'Data centers']
+        },
+        wireless: {
+          titulo: 'Wireless',
+          emoji: '📡',
+          descricao: 'Utilizado em AGVs (robôs móveis), empilhadeiras e dispositivos móveis. Ideal para comunicação com equipamentos em movimento ou áreas temporárias.',
+          tags: ['AGV', 'Mobilidade', 'IoT'],
+          aplicacoes: ['Armazéns', 'Logística', 'Equipamentos móveis']
         }
-      });
-    });
+      };
 
-    // -------- EVENTOS: BOTÕES DE TOPOLOGIA --------
-    topoBtns.forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        // Remove active de todos os botões
+      const topoInfo = {
+        estrela: {
+          titulo: '⭐ Layout em Estrela',
+          explicacao: 'Todos os dispositivos (CLPs, HMIs, drives) conectam-se a um switch central. É a topologia mais comum em células de manufatura modernas, oferecendo excelente desempenho e facilidade de manutenção.',
+          vantagens: [
+            'Falha em um dispositivo não afeta os demais (isolamento completo)',
+            'Facilidade para adicionar ou remover equipamentos sem impacto',
+            'Diagnóstico rápido e manutenção simplificada',
+            'Desempenho consistente mesmo com tráfego intenso',
+            'Suporte a redundância com switches em anel'
+          ],
+          desvantagens: [
+            'Dependência do switch central (ponto único de falha)',
+            'Maior custo com switches e cabeamento estruturado',
+            'Exige planejamento de rack e espaço físico para switches',
+            'Consumo de energia mais elevado'
+          ]
+        },
+        barramento: {
+          titulo: '〰️ Layout em Barramento',
+          explicacao: 'Todos os nós compartilham um único cabo (barramento) com terminações. Usado em redes fieldbus (Profibus, RS-485, Modbus) e em aplicações que exigem simplicidade e baixo custo.',
+          vantagens: [
+            'Menos cabos e menor custo de instalação',
+            'Simples de implementar em linhas longas',
+            'Ideal para redes com poucos dispositivos',
+            'Baixo consumo de energia e materiais'
+          ],
+          desvantagens: [
+            'Falha em um nó ou no cabo pode derrubar toda a rede',
+            'Dificuldade para diagnosticar problemas específicos',
+            'Degradação de desempenho com muitos dispositivos',
+            'Limitação no comprimento total e na taxa de transmissão',
+            'Necessidade de terminação adequada'
+          ]
+        }
+      };
+
+      // ============================================================
+      //  ELEMENTOS DOM
+      // ============================================================
+      const cabosCards = document.querySelectorAll('.card');
+      const explicacaoDiv = document.getElementById('explicacao-cabo');
+      const topoBtns = document.querySelectorAll('.topo-btn');
+      const detalheTopo = document.getElementById('detalhe-topo');
+      const toast = document.getElementById('toast');
+      let toastTimeout = null;
+
+      // ============================================================
+      //  FUNÇÕES AUXILIARES
+      // ============================================================
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2500);
+      }
+
+      // ============================================================
+      //  CABOS
+      // ============================================================
+      function atualizarExplicacaoCabo(caboKey) {
+        const info = cabosInfo[caboKey];
+        if (!info) return;
+
+        const tagsHtml = info.tags.map(tag => `<span class="chip">#${tag}</span>`).join('');
+        const appsHtml = info.aplicacoes.map(app => `<span class="chip">📍 ${app}</span>`).join('');
+
+        explicacaoDiv.innerHTML = `
+          <div class="cabo-detail">
+            <div class="cabo-title">
+              ${info.emoji} ${info.titulo}
+              <span class="tag">Industrial</span>
+            </div>
+            <p>${info.descricao}</p>
+            <div class="use-cases">
+              ${tagsHtml}
+              ${appsHtml}
+            </div>
+          </div>
+        `;
+      }
+
+      // Marcar card ativo
+      function setActiveCard(caboKey) {
+        cabosCards.forEach(c => c.classList.remove('active'));
+        const target = Array.from(cabosCards).find(c => c.dataset.cabo === caboKey);
+        if (target) target.classList.add('active');
+      }
+
+      // Evento dos cards
+      cabosCards.forEach(card => {
+        card.addEventListener('click', function() {
+          const cabo = this.dataset.cabo;
+          if (cabo && cabosInfo[cabo]) {
+            atualizarExplicacaoCabo(cabo);
+            setActiveCard(cabo);
+            showToast(`🔍 ${cabosInfo[cabo].titulo} selecionado`);
+          }
+        });
+      });
+
+      // ============================================================
+      //  TOPOLOGIAS
+      // ============================================================
+      function renderizarTopologia(topoKey) {
+        const info = topoInfo[topoKey];
+        if (!info) {
+          detalheTopo.innerHTML = `
+            <div class="empty-topo">
+              <span class="big-icon">🔍</span>
+              Selecione um layout para ver explicação, vantagens e desvantagens.
+            </div>
+          `;
+          return;
+        }
+
+        const vantagensHtml = info.vantagens.map(item => `<li>${item}</li>`).join('');
+        const desvantagensHtml = info.desvantagens.map(item => `<li>${item}</li>`).join('');
+
+        detalheTopo.innerHTML = `
+          <div class="topo-content">
+            <h4>${info.titulo}</h4>
+            <div class="desc">${info.explicacao}</div>
+            <div class="lists">
+              <div class="list-block vantagens">
+                <strong>✅ Vantagens</strong>
+                <ul>${vantagensHtml}</ul>
+              </div>
+              <div class="list-block desvantagens">
+                <strong>⚠️ Desvantagens</strong>
+                <ul>${desvantagensHtml}</ul>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function setActiveTopo(topoKey) {
         topoBtns.forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-
-        const topo = this.dataset.topo; // 'estrela' ou 'barramento'
-        renderizarTopologia(topo);
-      });
-    });
-
-    // -------- INICIALIZAÇÃO: ABAS (TABS) --------
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = {
-      cabos: document.getElementById('cabos'),
-      topologias: document.getElementById('topologias')
-    };
-
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
-        // Remove active de todos os botões de aba
-        tabBtns.forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-
-        const target = this.dataset.tab; // 'cabos' ou 'topologias'
-        // Esconde todos os conteúdos
-        Object.values(tabContents).forEach(el => el.classList.remove('active'));
-        // Mostra o conteúdo correspondente
-        if (target === 'cabos') {
-          tabContents.cabos.classList.add('active');
-        } else if (target === 'topologias') {
-          tabContents.topologias.classList.add('active');
-        }
-      });
-    });
-
-    // -------- EXIBIR VALORES INICIAIS (amigável) --------
-    // 1) Explicação inicial dos cabos: mensagem padrão (já está no HTML)
-    // 2) Nenhuma topologia selecionada (já está com empty-state)
-    // 3) Mas podemos deixar o primeiro card com destaque sutil? Não obrigatório.
-    // Adicionamos um pequeno detalhe: ao carregar, clicar no primeiro card? (opcional)
-    // Vamos dar um toque: exibir explicação do "Par Trançado" automaticamente ao entrar.
-    // (para não ficar vazio)
-    setTimeout(() => {
-      // Dispara um clique no primeiro card (Par Trançado) se existir
-      if (cabosCards.length > 0) {
-        cabosCards[0].click();
+        const target = Array.from(topoBtns).find(b => b.dataset.topo === topoKey);
+        if (target) target.classList.add('active');
       }
-      // Para a aba de topologias, já tem o empty-state, mas podemos deixar.
-      // Também podemos marcar o botão de estrela como ativo? Vamos deixar sem, 
-      // para o usuário escolher. Mas podemos ativar o primeiro ao mudar para aba topologias.
-      // Deixamos apenas o conteúdo vazio e o botão sem active.
-    }, 100);
 
-    // (Bônus) Se o usuário trocar para a aba topologias e nenhum botão estiver ativo,
-    // mostramos o estado vazio. Caso já tenha um ativo, mantém.
-    // Mas se entrar na aba e não tiver nenhum ativo, deixamos o empty.
-    // O botão ativo é controlado pelo clique.
-    // Também garantimos que, ao clicar em "Topologias" pela primeira vez, não haja um layout pré-selecionado.
-    // Isso já está ok.
+      // Evento dos botões de topologia
+      topoBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const topo = this.dataset.topo;
+          if (topo && topoInfo[topo]) {
+            renderizarTopologia(topo);
+            setActiveTopo(topo);
+            showToast(`📊 ${topoInfo[topo].titulo} carregado`);
+          }
+        });
+      });
 
-    // Caso queira que ao mudar para a aba topologias, se nenhum botão ativo, 
-    // mostramos o empty-state (já é o padrão). O conteúdo é limpo.
-    // Porém, se já houver um botão ativo (ex: clicou em estrela, depois foi pra cabos, e voltou), 
-    // mantemos a última seleção. O elemento 'detalheTopo' mantém o HTML.
-    // Isso é natural.
-  })();
-</script>
+      // ============================================================
+      //  TABS
+      // ============================================================
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabContents = {
+        cabos: document.getElementById('cabos'),
+        topologias: document.getElementById('topologias')
+      };
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          tabBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+
+          const target = this.dataset.tab;
+          Object.values(tabContents).forEach(el => el.classList.remove('active'));
+          if (target === 'cabos') {
+            tabContents.cabos.classList.add('active');
+          } else if (target === 'topologias') {
+            tabContents.topologias.classList.add('active');
+          }
+        });
+      });
+
+      // ============================================================
+      //  INICIALIZAÇÃO
+      // ============================================================
+      // Carrega o primeiro card (Par Trançado) automaticamente
+      setTimeout(() => {
+        if (cabosCards.length > 0) {
+          cabosCards[0].click();
+        }
+      }, 200);
+
+      // Pré-seleciona "Estrela" na aba de topologias? Deixamos vazio para o usuário escolher.
+      // Mas se quiser algo inicial, pode descomentar:
+      // setTimeout(() => {
+      //   const estrelaBtn = Array.from(topoBtns).find(b => b.dataset.topo === 'estrela');
+      //   if (estrelaBtn) estrelaBtn.click();
+      // }, 300);
+
+    })();
+  </script>
 </body>
 </html>
