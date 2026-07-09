@@ -1,117 +1,272 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia Visual de Redes para Automação</title>
-    <style>
-        :root {
-            --primary-color: #0056b3;
-            --bg-color: #f4f7f6;
-            --card-bg: #ffffff;
-            --text-color: #333;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guia Visual de Redes para Automação</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
 
-        h1 {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    body{
+      background:#f4f6f9;
+      color:#333;
+    }
 
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            max-width: 1000px;
-            width: 100%;
-            justify-content: center;
-        }
+    header{
+      background:#0d6efd;
+      color:white;
+      padding:20px;
+      text-align:center;
+    }
 
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 20px;
-            flex: 1;
-            min-width: 300px;
-            max-width: 450px;
-        }
+    .tabs{
+      display:flex;
+      justify-content:center;
+      background:#fff;
+      box-shadow:0 2px 5px rgba(0,0,0,.15);
+    }
 
-        .card h2 {
-            margin-top: 0;
-            color: var(--primary-color);
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
+    .tab{
+      padding:15px 25px;
+      cursor:pointer;
+      border:none;
+      background:none;
+      font-size:16px;
+      transition:.3s;
+    }
 
-        /* Estilos das Abas (Card 1) */
-        .tabs {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 15px;
-        }
+    .tab:hover,
+    .tab.active{
+      background:#0d6efd;
+      color:white;
+    }
 
-        .tab-btn, .btn {
-            background-color: #eee;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
+    .content{
+      display:none;
+      padding:30px;
+    }
 
-        .tab-btn.active, .btn.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
+    .content.active{
+      display:block;
+    }
 
-        .tab-content, .top-content {
-            display: none;
-        }
+    .cards{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
 
-        .tab-content.active, .top-content.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
+    .card{
+      background:white;
+      width:220px;
+      padding:20px;
+      border-radius:10px;
+      box-shadow:0 3px 8px rgba(0,0,0,.15);
+      text-align:center;
+      cursor:pointer;
+      transition:.3s;
+    }
 
-        .tab-content img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-        }
+    .card:hover{
+      transform:translateY(-5px);
+      background:#e9f2ff;
+    }
 
-        /* Estilos dos Botões (Card 2) */
-        .buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
+    .info{
+      margin-top:25px;
+      background:white;
+      padding:20px;
+      border-radius:10px;
+      box-shadow:0 3px 8px rgba(0,0,0,.15);
+    }
 
-        .btn {
-            flex: 1;
-        }
+    .buttons{
+      display:flex;
+      gap:15px;
+      justify-content:center;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+    }
 
-        ul {
-            padding-left: 20px;
-        }
+    .buttons button{
+      padding:12px 20px;
+      border:none;
+      border-radius:8px;
+      background:#0d6efd;
+      color:white;
+      cursor:pointer;
+      font-size:15px;
+    }
 
-        .pro { color: green; font-weight: bold; }
-        .con { color: red; font-weight: bold; }
+    .buttons button:hover{
+      background:#084298;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+    ul{
+      margin-left:20px;
+      margin-top:8px;
+      margin-bottom:10px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<header>
+  <h1>Guia Visual de Redes para Automação</h1>
+  <p>Tipos de cabos e topologias usados em ambientes industriais</p>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="abrirAba('cabos', this)">Cabos Industriais</button>
+  <button class="tab" onclick="abrirAba('topologias', this)">Topologias</button>
+</div>
+
+<!-- ABA 1 -->
+
+<section id="cabos" class="content active">
+
+  <div class="cards">
+
+```
+<div class="card" onclick="mostrarCabo('par')">
+  <h2>Par Trançado</h2>
+</div>
+
+<div class="card" onclick="mostrarCabo('fibra')">
+  <h2>Fibra Óptica</h2>
+</div>
+
+<div class="card" onclick="mostrarCabo('wireless')">
+  <h2>Wireless</h2>
+</div>
+```
+
+  </div>
+
+  <div class="info" id="infoCabos">
+    <h2>Selecione um cabo</h2>
+    <p>Clique em um dos cards para visualizar a explicação.</p>
+  </div>
+
+</section>
+
+<!-- ABA 2 -->
+
+<section id="topologias" class="content">
+
+  <div class="buttons">
+    <button onclick="mostrarTopo('estrela')">Layout em Estrela</button>
+    <button onclick="mostrarTopo('barramento')">Layout em Barramento</button>
+  </div>
+
+  <div class="info" id="infoTopo">
+    <h2>Escolha uma topologia</h2>
+    <p>Clique em um dos botões acima.</p>
+  </div>
+
+</section>
+
+<script>
+
+function abrirAba(id, elemento){
+
+    document.querySelectorAll(".content").forEach(sec=>{
+        sec.classList.remove("active");
+    });
+
+    document.querySelectorAll(".tab").forEach(tab=>{
+        tab.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+    elemento.classList.add("active");
+}
+
+function mostrarCabo(tipo){
+
+    const info=document.getElementById("infoCabos");
+
+    if(tipo==="par"){
+        info.innerHTML=`
+        <h2>Par Trançado</h2>
+        <p>É usado para conectar CLPs, computadores, IHMs e switches dentro da fábrica. É uma solução econômica para distâncias menores.</p>`;
+    }
+
+    if(tipo==="fibra"){
+        info.innerHTML=`
+        <h2>Fibra Óptica</h2>
+        <p>É usada para ligar setores distantes da fábrica. Possui alta velocidade e não sofre interferência elétrica.</p>`;
+    }
+
+    if(tipo==="wireless"){
+        info.innerHTML=`
+        <h2>Wireless</h2>
+        <p>É utilizado para comunicação sem fios entre equipamentos móveis, tablets industriais, sensores e coletores de dados.</p>`;
+    }
+
+}
+
+function mostrarTopo(tipo){
+
+    const info=document.getElementById("infoTopo");
+
+    if(tipo==="estrela"){
+
+        info.innerHTML=`
+        <h2>Layout em Estrela</h2>
+
+        <p>Todos os equipamentos são ligados a um equipamento central (switch).</p>
+
+        <h3>Vantagens</h3>
+        <ul>
+            <li>Fácil manutenção.</li>
+            <li>Falha em um cabo não afeta os demais.</li>
+            <li>Boa organização da rede.</li>
+        </ul>
+
+        <h3>Desvantagens</h3>
+        <ul>
+            <li>Usa mais cabos.</li>
+            <li>Depende do switch central.</li>
+        </ul>
+        `;
+    }
+
+    if(tipo==="barramento"){
+
+        info.innerHTML=`
+        <h2>Layout em Barramento</h2>
+
+        <p>Todos os equipamentos compartilham o mesmo cabo principal.</p>
+
+        <h3>Vantagens</h3>
+        <ul>
+            <li>Instalação simples.</li>
+            <li>Menor quantidade de cabos.</li>
+            <li>Custo reduzido.</li>
+        </ul>
+
+        <h3>Desvantagens</h3>
+        <ul>
+            <li>Falhas podem interromper toda a comunicação.</li>
+            <li>Mais difícil localizar problemas.</li>
+        </ul>
+        `;
+    }
+
+}
+
+</script>
+
+</body>
+</html>
